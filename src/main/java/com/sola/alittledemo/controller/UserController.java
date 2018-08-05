@@ -13,6 +13,8 @@ public class UserController {
     public Object getUser(@PathVariable Long userId) {
         log.info("查询用户, 用户id: {}", userId);
         // release01 修复develop上的bug
+        // hotfix 修复bug
+        // release分支修复, 测试
         return "查询用户, 用户id: " + userId;
     }
 
