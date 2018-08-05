@@ -12,6 +12,8 @@ public class UserController {
     @GetMapping("/user/{userId}")
     public Object getUser(@PathVariable Long userId) {
         log.info("查询用户, 用户id: {}", userId);
+        // hotfix 修复bug
+        // release分支修复, 测试
         return "查询用户, 用户id: " + userId;
     }
 
