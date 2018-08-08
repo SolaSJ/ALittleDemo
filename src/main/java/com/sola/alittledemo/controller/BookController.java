@@ -13,6 +13,7 @@ public class BookController {
     public Object getBook(@PathVariable(name = "bookId") Long bookId) {
         log.info("feature01 ---1");
         log.info("feature, --2");
+        log.info("feature02, --1");
         log.info("bookId is {}", bookId);
     }
 
