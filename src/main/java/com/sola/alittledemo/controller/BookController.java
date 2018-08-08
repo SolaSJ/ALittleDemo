@@ -13,6 +13,7 @@ public class BookController {
     public Object getBook(@PathVariable(name = "bookId") Long bookId) {
         // 获取book信息
         // 再次修改
+        // feature02 和 feature01 修改同一份文件
         log.info("bookId is {}", bookId);
     }
 
