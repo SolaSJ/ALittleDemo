@@ -11,7 +11,7 @@ public class BookController {
 
     @GetMapping("/book/{bookId}")
     public Object getBook(@PathVariable(name = "bookId") Long bookId) {
-
+        log.info("feature01 ---1");
         log.info("bookId is {}", bookId);
     }
 
