@@ -15,6 +15,7 @@ public class BookController {
         // 再次修改
         // feature02 和 feature01 修改同一份文件
         // 01: 增加用户身份验证
+        // 02: 增加用户权限管理
         log.info("bookId is {}", bookId);
     }
 
