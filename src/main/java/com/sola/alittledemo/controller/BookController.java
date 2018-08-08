@@ -11,6 +11,7 @@ public class BookController {
 
     @GetMapping("/book/{bookId}")
     public Object getBook(@PathVariable(name = "bookId") Long bookId) {
+        // 获取book信息
         log.info("bookId is {}", bookId);
     }
 
