@@ -14,6 +14,7 @@ public class BookController {
         log.info("feature01 ---1");
         log.info("feature, --2");
         log.info("feature02, --1");
+        log.info("feature, --2");
         log.info("bookId is {}", bookId);
     }
 
