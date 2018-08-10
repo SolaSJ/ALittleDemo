@@ -12,6 +12,7 @@ public class UserController {
     @GetMapping("/user/{userId}")
     public Object getUser(@PathVariable Long userId) {
         log.info("查询用户, 用户id: {}", userId);
+        // 测试中文
         return "查询用户, 用户id: " + userId;
     }
 
