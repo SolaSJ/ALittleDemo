@@ -11,8 +11,6 @@ public class AlittledemoApplicationTests {
 
     @Test
     public void contextLoads() {
-        // 第一次修改
-        // 第二次修改
     }
 
 }
