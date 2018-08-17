@@ -13,7 +13,6 @@ public class UserController {
     public Object getUser(@PathVariable Long userId) {
         log.info("查询用户, 用户id: {}", userId);
         // 测试中文
-        // 001
         return "查询用户, 用户id: " + userId;
     }
 
