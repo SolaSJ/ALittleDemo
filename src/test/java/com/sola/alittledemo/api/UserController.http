@@ -3,3 +3,27 @@ Accept: */*
 Cache-Control: no-cache
 
 ###
+
+GET http://localhost:9001/actuator/info
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:9001/actuator/beans
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:9001/actuator/mappings
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:9001/actuator/env
+Accept: */*
+Cache-Control: no-cache
+
+###
