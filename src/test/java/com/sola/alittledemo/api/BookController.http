@@ -1,0 +1,16 @@
+GET http://localhost:9000/book/1
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+POST http://localhost:9000/book
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "bookName": "起风了"
+}
+
+###
