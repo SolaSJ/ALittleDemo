@@ -1,6 +1,7 @@
 package com.sola.alittledemo.service;
 
-import com.sola.alittledemo.entity.Book;
+import com.sola.alittledemo.bean.po.BookPo;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author Sola
@@ -8,14 +9,13 @@ import com.sola.alittledemo.entity.Book;
  */
 public interface BookService {
 
-
     /**
      * 新增book
      *
-     * @param book
+     * @param bookPo
      * @return
      */
-    Integer insertBook(Book book);
+    Integer insertBook(BookPo bookPo);
 
     /**
      * 根据id查询book详情
@@ -23,6 +23,14 @@ public interface BookService {
      * @param bookId
      * @return
      */
-    Book getBook(Long bookId);
+    BookPo getBook(Long bookId);
+
+    /**
+     * 上传book excel
+     *
+     * @param file
+     * @return
+     */
+    Object uploadBook(MultipartFile[] file);
 
 }

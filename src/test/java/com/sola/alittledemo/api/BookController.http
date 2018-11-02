@@ -1,16 +1,71 @@
-GET http://localhost:9000/book/1
+GET http://localhost:9000/books/-1
 Accept: */*
 Cache-Control: no-cache
 
 ###
 
-POST http://localhost:9000/book
+POST http://localhost:9000/books
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "bookName": "起风了"
+  "image": "image.png",
+  "users": [
+    {
+      "name": "su",
+      "age": 18
+    },
+    {
+      "name": "su11",
+      "age": 18
+    }
+  ]
 }
 
 ###
+
+###
+POST http://localhost:9000/books/multi
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+[
+  {
+    "users": [
+      {
+        "name": "su",
+        "age": 18
+      },
+      {
+        "name": "su11",
+        "age": 18
+      }
+    ]
+  },
+  {
+    "bookName": "起风了",
+    "users": [
+      {
+        "name": "su",
+        "age": 18
+      },
+      {
+        "name": "su11",
+        "age": 18
+      }
+    ]
+  }
+]
+
+###
+POST http://localhost:9000/books/test
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+
+
+###
+

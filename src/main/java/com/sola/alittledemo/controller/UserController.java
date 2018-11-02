@@ -1,6 +1,6 @@
 package com.sola.alittledemo.controller;
 
-import com.sola.alittledemo.entity.Book;
+import com.sola.alittledemo.bean.param.BookParam;
 import com.sola.alittledemo.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,9 +38,9 @@ public class UserController {
     public Object testAsync() {
         log.info("start testAsync");
 
-        userService.testAsync(new Book(1L, "book1"), "sususu", 100);
-        userService.testAsync(new Book(1L, "book1"), "", 100);
-        userService.testAsync(new Book(1L, "book1"), null, 100);
+        userService.testAsync(new BookParam(1L, "book1"), "sususu", 100);
+        userService.testAsync(new BookParam(1L, "book1"), "", 100);
+        userService.testAsync(new BookParam(1L, "book1"), null, 100);
 
         userService.test();
 

@@ -1,7 +1,7 @@
 package com.sola.alittledemo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.sola.alittledemo.entity.Book;
+import com.sola.alittledemo.bean.po.BookPo;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -9,5 +9,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @date 2018/10/11
  */
 @Mapper
-public interface BookMapper extends BaseMapper<Book> {
+public interface BookMapper extends BaseMapper<BookPo> {
 }

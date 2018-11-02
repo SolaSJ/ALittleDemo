@@ -1,5 +1,6 @@
 package com.sola.alittledemo.aop;
 
+import com.alibaba.fastjson.JSON;
 import com.sola.alittledemo.annotation.LogTime;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -47,8 +48,9 @@ public class LogAop {
             jp.proceed();
 
             Object[] args = jp.getArgs();
+            String[] argsArr = Arrays.stream(args).map(JSON::toJSONString).toArray(String[]::new);
 
-            log.info("[{}] 传入参数为: {}, 耗时: {}ms", logTime.value(), Arrays.toString(args), Instant.now().toEpochMilli() - startTime);
+            log.info("[{}] 传入参数为: {}, 耗时: {}ms", logTime.value(), Arrays.toString(argsArr), Instant.now().toEpochMilli() - startTime);
         } catch (Throwable throwable) {
             log.error("[{}] 调用方法异常", logTime.value());
             throwable.printStackTrace();

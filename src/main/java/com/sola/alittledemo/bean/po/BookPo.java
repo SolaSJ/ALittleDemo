@@ -1,11 +1,11 @@
-package com.sola.alittledemo.entity;
+package com.sola.alittledemo.bean.po;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.sola.alittledemo.entity.User;
 
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -14,25 +14,29 @@ import java.util.List;
  * @date 2018/10/08
  */
 @TableName(value = "book")
-public class Book {
+public class BookPo {
 
     @TableId(value = "book_id", type = IdType.AUTO)
     private Long bookId;
 
-    @NotBlank(message = "bookName不能为null或''")
     private String bookName;
+
+    private String image;
 
     @TableField(exist = false)
     private List<String> chapters;
 
+    private List<User> users;
+
     private LocalDateTime ctime;
+
     private LocalDateTime utime;
 
-    public Book() {
+    public BookPo() {
 
     }
 
-    public Book(Long bookId, String bookName) {
+    public BookPo(Long bookId, String bookName) {
         this.bookId = bookId;
         this.bookName = bookName;
     }
@@ -53,6 +57,14 @@ public class Book {
         this.bookName = bookName;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public List<String> getChapters() {
         return chapters;
     }
@@ -62,7 +74,6 @@ public class Book {
     }
 
     public LocalDateTime getCtime() {
-        // return ctime != null ? ctime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")) : null;
         return ctime;
     }
 
@@ -71,7 +82,6 @@ public class Book {
     }
 
     public LocalDateTime getUtime() {
-        // return utime != null ? utime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")) : null;
         return utime;
     }
 
@@ -79,9 +89,17 @@ public class Book {
         this.utime = utime;
     }
 
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
     @Override
     public String toString() {
-        return "Book{" +
+        return "BookParam{" +
                 "bookId=" + bookId +
                 ", bookName='" + bookName + '\'' +
                 ", chapters=" + chapters +
