@@ -1,22 +1,33 @@
-package com.sola.alittledemo.bean.vo;
+package com.sola.alittledemo.bean.req;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.sola.alittledemo.bean.UpdateGroup;
 import com.sola.alittledemo.entity.User;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
 /**
  * @author Sola
- * @date 2018/10/25
+ * @date 2018/10/08
  */
-public class BookVo {
+@TableName(value = "book")
+public class BookReq {
 
+    @TableId(value = "book_id", type = IdType.AUTO)
+    @NotNull(message = "bookId不能为null", groups = {UpdateGroup.class})
     private Long bookId;
 
+    @NotNull
     private String bookName;
 
-    private List<String> imgMd5s;
+    private String image;
 
+    @TableField(exist = false)
     private List<String> chapters;
 
     private List<User> users;
@@ -25,11 +36,11 @@ public class BookVo {
 
     private LocalDateTime utime;
 
-    public BookVo() {
+    public BookReq() {
 
     }
 
-    public BookVo(Long bookId, String bookName) {
+    public BookReq(Long bookId, String bookName) {
         this.bookId = bookId;
         this.bookName = bookName;
     }
@@ -50,12 +61,12 @@ public class BookVo {
         this.bookName = bookName;
     }
 
-    public List<String> getImgMd5s() {
-        return imgMd5s;
+    public String getImage() {
+        return image;
     }
 
-    public void setImgMd5s(List<String> imgMd5s) {
-        this.imgMd5s = imgMd5s;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public List<String> getChapters() {
@@ -67,7 +78,6 @@ public class BookVo {
     }
 
     public LocalDateTime getCtime() {
-        // return ctime != null ? ctime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")) : null;
         return ctime;
     }
 
@@ -76,7 +86,6 @@ public class BookVo {
     }
 
     public LocalDateTime getUtime() {
-        // return utime != null ? utime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")) : null;
         return utime;
     }
 
@@ -100,4 +109,5 @@ public class BookVo {
                 ", chapters=" + chapters +
                 '}';
     }
+
 }

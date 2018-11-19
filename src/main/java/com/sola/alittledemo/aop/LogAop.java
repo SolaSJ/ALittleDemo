@@ -2,9 +2,11 @@ package com.sola.alittledemo.aop;
 
 import com.alibaba.fastjson.JSON;
 import com.sola.alittledemo.annotation.LogTime;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,30 +31,29 @@ public class LogAop {
     public void logPointCut(LogTime logTime) {
     }
 
-    // @Before("logPointCut(logTime)")
-    // public void doBefore(JoinPoint joinPoint, LogTime logTime) {
-    //     // 记录请求到达时间
-    //     beginTime.set(System.currentTimeMillis());
-    //     log.info("cy666 note:{}", logTime.value());
-    // }
+    @Before(value = "logPointCut(logTime)", argNames = "joinPoint,logTime")
+    public void doBefore(JoinPoint joinPoint, LogTime logTime) {
+        String[] argsArr = Arrays.stream(joinPoint.getArgs()).map(JSON::toJSONString).toArray(String[]::new);
+
+        log.info("{} 传入参数为: {}", logTime.value(), Arrays.toString(argsArr));
+    }
     //
     // @After("logPointCut(logTime)")
     // public void doAfter(LogTime logTime) {
     //     log.info("cy666 statistic time:{}, note:{}", System.currentTimeMillis() - beginTime.get(), logTime.value());
     // }
 
-    @Around("logPointCut(logTime)")
+    @Around(value = "logPointCut(logTime)", argNames = "jp,logTime")
     public void watchPerformance(ProceedingJoinPoint jp, LogTime logTime) {
         try {
             long startTime = Instant.now().toEpochMilli();
+
             jp.proceed();
 
-            Object[] args = jp.getArgs();
-            String[] argsArr = Arrays.stream(args).map(JSON::toJSONString).toArray(String[]::new);
-
-            log.info("[{}] 传入参数为: {}, 耗时: {}ms", logTime.value(), Arrays.toString(argsArr), Instant.now().toEpochMilli() - startTime);
+            String[] argsArr = Arrays.stream(jp.getArgs()).map(JSON::toJSONString).toArray(String[]::new);
+            log.info("{} 传入参数为: {}, 耗时: {}ms", logTime.value(), Arrays.toString(argsArr), Instant.now().toEpochMilli() - startTime);
         } catch (Throwable throwable) {
-            log.error("[{}] 调用方法异常", logTime.value());
+            log.error("{} 调用方法异常", logTime.value());
             throwable.printStackTrace();
         }
     }

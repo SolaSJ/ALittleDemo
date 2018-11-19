@@ -1,6 +1,4 @@
-package com.sola.alittledemo.bean.response;
-
-import java.util.List;
+package com.sola.alittledemo.bean.resp;
 
 /**
  * @author Sola
@@ -11,7 +9,6 @@ public class Response<T> {
     private Integer code;
     private String msg;
     private T data;
-    private List<T> list;
 
     public Integer getCode() {
         return code;
@@ -37,11 +34,4 @@ public class Response<T> {
         this.data = data;
     }
 
-    public List<T> getList() {
-        return list;
-    }
-
-    public void setList(List<T> list) {
-        this.list = list;
-    }
 }

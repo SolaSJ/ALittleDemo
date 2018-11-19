@@ -1,7 +1,7 @@
 package com.sola.alittledemo.service.impl;
 
 import com.sola.alittledemo.annotation.LogTime;
-import com.sola.alittledemo.bean.param.BookParam;
+import com.sola.alittledemo.bean.req.BookReq;
 import com.sola.alittledemo.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Async(value = "asyncExecutor")
     @LogTime("测试异步方法")
-    public void testAsync(BookParam book, String name, int age) {
+    public void testAsync(BookReq book, String name, int age) {
 
         String s = Optional.ofNullable(name).orElse(null);
         log.info("name is {}", s);

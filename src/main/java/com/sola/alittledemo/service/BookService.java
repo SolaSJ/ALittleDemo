@@ -1,7 +1,10 @@
 package com.sola.alittledemo.service;
 
+import com.sola.alittledemo.bean.bo.BookBo;
 import com.sola.alittledemo.bean.po.BookPo;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * @author Sola
@@ -23,7 +26,14 @@ public interface BookService {
      * @param bookId
      * @return
      */
-    BookPo getBook(Long bookId);
+    BookBo getBook(Long bookId);
+
+    /**
+     * 查询所有book
+     *
+     * @return
+     */
+    List<BookPo> getAllBook();
 
     /**
      * 上传book excel
@@ -31,6 +41,22 @@ public interface BookService {
      * @param file
      * @return
      */
-    Object uploadBook(MultipartFile[] file);
+    Object uploadBook(MultipartFile file);
+
+    /**
+     * 根据bookId删除
+     *
+     * @param bookId
+     * @return
+     */
+    Object deleteBook(Long bookId);
+
+    /**
+     * 根据bookId数组删除
+     *
+     * @param bookIds
+     * @return
+     */
+    Object deleteBooks(List<Long> bookIds);
 
 }

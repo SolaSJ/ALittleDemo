@@ -26,9 +26,7 @@ public class ImageValidator implements ConstraintValidator<Image, String> {
         }
 
         boolean isValid = s.endsWith(".jpg");
-        if (!isValid) {
-            return false;
-        }
+
         return isValid;
     }
 }

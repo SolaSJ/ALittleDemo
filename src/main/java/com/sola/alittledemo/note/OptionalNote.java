@@ -2,7 +2,7 @@ package com.sola.alittledemo.note;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.sola.alittledemo.bean.param.BookParam;
+import com.sola.alittledemo.bean.req.BookReq;
 import com.sola.alittledemo.util.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,15 +22,15 @@ public class OptionalNote {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     public void note(Long bookId) {
-        BookParam book1 = new BookParam(bookId, "defaultBookName");
+        BookReq book1 = new BookReq(bookId, "defaultBookName");
 
         // Optional构造方式,
         //
         // Optional.of(obj), Optional.ofNullable(obj)和Optional.empty()
-        Optional<BookParam> bookOpt1 = Optional.of(book1);
+        Optional<BookReq> bookOpt1 = Optional.of(book1);
         // 如果不能确定是否为空, 建议使用ofNullable()
-        Optional<BookParam> bookOpt2 = Optional.ofNullable(book1);
-        Optional<BookParam> bookOpt3 = Optional.ofNullable(null);
+        Optional<BookReq> bookOpt2 = Optional.ofNullable(book1);
+        Optional<BookReq> bookOpt3 = Optional.ofNullable(null);
 
         // Optional的应用
         //
@@ -44,15 +44,15 @@ public class OptionalNote {
         // public <X extends Throwable> T orElseThrow(Supplier<? extends X> exceptionSupplier) throws X
 
         // 如果不为null返回bookPo, 否则返回null, 而不是 return user.isPresent() ? user.get() : null;
-        BookParam book2 = bookOpt3.orElse(null);
-        BookParam book3 = bookOpt3.orElseGet(this::getBook);
+        BookReq book2 = bookOpt3.orElse(null);
+        BookReq book3 = bookOpt3.orElseGet(this::getBook);
         // 而不要 if (user.isPresent()) {}
         bookOpt1.ifPresent(System.out::println);
 
         // 关于map的使用
         String[] arr = {"第一章", "第二章"};
         book1.setChapters(Stream.of(arr).collect(Collectors.toList()));
-        List<String> chapters = bookOpt1.map(BookParam::getChapters).orElse(new ArrayList<>());
+        List<String> chapters = bookOpt1.map(BookReq::getChapters).orElse(new ArrayList<>());
         chapters.forEach(System.out::print);
 
         String bookName = null;
@@ -66,12 +66,12 @@ public class OptionalNote {
 
         // 结合lambda表达式的写法
         book1.setBookName(null);
-        String bookName1 = bookOpt1.map(BookParam::getBookName).map(String::toUpperCase).orElse(null);
+        String bookName1 = bookOpt1.map(BookReq::getBookName).map(String::toUpperCase).orElse(null);
         log.info("bookName1: {}", bookName1);
     }
 
-    private BookParam getBook() {
-        return new BookParam();
+    private BookReq getBook() {
+        return new BookReq();
     }
 
     private void demo() {

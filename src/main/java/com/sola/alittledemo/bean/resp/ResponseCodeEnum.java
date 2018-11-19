@@ -1,4 +1,4 @@
-package com.sola.alittledemo.bean.response;
+package com.sola.alittledemo.bean.resp;
 
 /**
  * @author Sola
