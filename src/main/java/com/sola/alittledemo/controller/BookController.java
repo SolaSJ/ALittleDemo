@@ -1,10 +1,14 @@
 package com.sola.alittledemo.controller;
 
-import com.sola.alittledemo.bean.po.BookPo;
-import com.sola.alittledemo.bean.param.BookParam;
-import com.sola.alittledemo.service.BookService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.alibaba.fastjson.JSON;
+import com.sola.alittledemo.controller.vo.BookUtils;
+import com.sola.alittledemo.service.bo.BookBO;
+import com.sola.alittledemo.mapper.entity.BookDO;
+import com.sola.alittledemo.controller.vo.BookVO;
+import com.sola.alittledemo.service.IBookService;
+import com.sola.alittledemo.common.validator.group.UpdateGroup;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -12,53 +16,73 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import java.util.List;
 
 /**
  * @author Sola
  * @date 2018/10/08
  */
-
-@Validated
+@Slf4j
 @RestController
 public class BookController {
 
-    private Logger log = LoggerFactory.getLogger(this.getClass());
-
-    private final BookService bookService;
+    private final IBookService bookService;
 
     @Autowired
-    public BookController(BookService bookService) {
+    public BookController(IBookService bookService) {
         this.bookService = bookService;
     }
 
-    @PostMapping("/books")
-    public Object insertBook(@RequestBody @Validated BookParam bookParam) {
-        BookPo bookPo = new BookPo();
-        BeanUtils.copyProperties(bookParam, bookPo);
-        return bookService.insertBook(bookPo);
-    }
-
     @GetMapping("/books/{bookId}")
-    public Object getBook(@PathVariable(name = "bookId") @Min(value = 1, message = "bookId最小为1") Long bookId) {
-        return bookService.getBook(bookId);
+    public Object getBook(@PathVariable(name = "bookId") Long bookId) {
+        BookBO bookBo = bookService.getBook(bookId);
+        BookVO bookVo = new BookVO();
+        BookUtils.copy(bookBo, bookVo);
+        return bookVo;
     }
 
-    @PostMapping("/books/upload")
-    public Object uploadBook(@RequestParam("file") MultipartFile[] file) {
-        return bookService.uploadBook(file);
+    @GetMapping("/books")
+    public Object listBooks(T t) {
+        //
+        // BookBO bookBo = JSON.parseObject(where, BookBO.class);
+        // List<BookBO> bookBOS = bookService.listBooks(bookBo);
+        // List<BookVO> bookVOS = new ArrayList<>();
+        // BookUtils.copy(bookBOS, bookVOS);
+        // return bookVOS;
+        return null;
+    }
+
+    @PostMapping("/books")
+    public Object insertBook(@RequestBody @Validated BookBO bookReq) {
+        BookDO bookDO = new BookDO();
+        BeanUtils.copyProperties(bookReq, bookDO);
+        return bookService.insertBook(bookDO);
     }
 
     @PostMapping("/books/multi")
-    public Object insertMultiBooks(@RequestBody @Valid List<BookParam> bookList) {
+    public Object insertMultiBooks(@RequestBody @Valid List<BookBO> bookList) {
         return null;
     }
 
+    @PostMapping("/books/upload")
+    public Object uploadBook(@RequestParam("file") MultipartFile file) {
+        return bookService.uploadBook(file);
+    }
 
-    @PostMapping("/books/test")
-    public Object uploadBook(@RequestBody Integer[] ids) {
+    @PutMapping("/books")
+    public Object updateBook(@RequestBody @Validated({UpdateGroup.class}) BookBO bookReq) {
         return null;
+    }
+
+    @DeleteMapping("/books/{bookId}")
+    public Object deleteBook(@PathVariable("bookId") Long bookId) {
+        return bookService.deleteBook(bookId);
+    }
+
+    @DeleteMapping("/books")
+    public Object deleteBooks(@RequestParam String bookIds) {
+        List<Long> list = JSON.parseArray(bookIds, Long.class);
+        return bookService.deleteBooks(list);
     }
 
 }

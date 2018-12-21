@@ -1,6 +1,6 @@
 package com.sola.alittledemo.service;
 
-import com.sola.alittledemo.bean.param.BookParam;
+import com.sola.alittledemo.service.bo.BookBO;
 
 /**
  * @author Sola
@@ -11,7 +11,7 @@ public interface UserService {
     /**
      * 执行异步任务
      */
-    void testAsync(BookParam book, String name, int age);
+    void testAsync(BookBO book, String name, int age);
 
     void test();
 
