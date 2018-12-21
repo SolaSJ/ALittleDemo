@@ -3,3 +3,33 @@ Accept: */*
 Cache-Control: no-cache
 
 ###
+
+GET http://localhost:9000//user/testAsync
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:9000/actuator/info
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:9000/actuator/beans
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:9000/actuator/mappings
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:9000/actuator/env
+Accept: */*
+Cache-Control: no-cache
+
+###

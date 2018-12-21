@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sola.alittledemo.mapper.BookMapper">
+
+    <select id="listBooks" resultType="com.sola.alittledemo.mapper.entity.BookDO">
+        <bind name="bookNameLike" value="query.bookName + '%'"/>
+
+        select * from book b
+        <if test="query.imgMd5s != null and query.imgMd5s.size > 0">
+            left join book_image bi on b.book_id = bi.book_id
+        </if>
+        <where>
+            <if test="query.bookName != null and query.bookName.trim != ''">
+                and b.book_name like #{bookNameLike}
+            </if>
+            <if test="query.bookIds != null and query.bookIds.size > 0">
+                and b.book_id in
+                <foreach collection="query.bookIds" item="item" open="(" close=")" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="query.imgMd5s != null and query.imgMd5s.size > 0">
+                and bi.img_md5 in
+                <foreach collection="query.imgMd5s" item="item" open="(" close=")" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+</mapper>
