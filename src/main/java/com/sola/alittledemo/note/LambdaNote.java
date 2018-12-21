@@ -18,7 +18,7 @@ public class LambdaNote {
 
     // {
     //     Arrays.asList()
-    //     new BookPo();
+    //     new BookDO();
     // }
 
     public static void main(String[] args) {

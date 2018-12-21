@@ -1,6 +1,6 @@
 package com.sola.alittledemo.test;
 
-import com.sola.alittledemo.bean.po.BookPo;
+import com.sola.alittledemo.mapper.entity.BookDO;
 import com.sola.alittledemo.mapper.BookMapper;
 import org.junit.Assert;
 import org.junit.Test;
@@ -25,7 +25,7 @@ public class BookTest {
     @Test
     public void testSelect() {
         System.out.println(("----- selectAll method test ------"));
-        List<BookPo> userList = bookMapper.selectList(null);
+        List<BookDO> userList = bookMapper.selectList(null);
         Assert.assertEquals(17, userList.size());
         userList.forEach(System.out::println);
     }

@@ -1,11 +1,18 @@
-GET http://localhost:9000/books/2
+GET http://localhost:9000/books?where={"bookName":"说不完", "imgMd5s":["asdfasdfcasdfsadfasdfasd"]}
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:9000/books/
 Accept: */*
 Cache-Control: no-cache
 
 ###
 
 GET http://localhost:9000/books?where={
-  "image": "image.png",
+  "image": "image.jpg",
+  "bookName": "111",
   "users": [
     {
       "name": "su",
@@ -22,13 +29,19 @@ Cache-Control: no-cache
 
 ###
 
+GET http://localhost:9000/books?image=image.jgp&bookName=111
+Accept: */*
+Cache-Control: no-cache
+
+###
+
 POST http://localhost:9000/books
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
 
 {
-  "image": "image.png",
+  "bookName": "111",
   "users": [
     {
       "name": "su",
@@ -38,6 +51,10 @@ Content-Type: application/json
       "name": "su11",
       "age": 18
     }
+  ],
+  "imgMd5s": [
+    "image.jpg",
+    "test.jpg"
   ]
 }
 
